@@ -2,31 +2,44 @@ import java.util.Stack;
 
 public class NumberSorter
 {
-	void sort(int[] numbers) 
+	void sort(int[] numbers, boolean ascending) 
 	{
 		// The source stack, from which the numbers are popped
 		Stack<Integer> srcStack = new Stack<Integer>();
+		
 		// The dest stack, to which the numbers are pushed
 		Stack<Integer> destStack = new Stack<Integer>();
+		
 		// Add the initial array of numbers to the source stack.
 		for (int number : numbers)
-		{
 			srcStack.push(number);
-		}
 		
-			while(srcStack.size()>0);
-			{
-				int next = srcStack.pop();
-				while(destStack.size()>0 & destStack.peek()>next);
-					{
-						srcStack.push(destStack.pop());
-					}
-					destStack.push(next);
-				}
+		while(srcStack.size()>0);
+		{
+
+			int next = srcStack.pop();
 				
-			for (int number : numbers);
-			System.out.println(destStack);
-			System.exit(0);
+			while(ascending && destStack.size()>0 && destStack.peek()>next)
+			{
+				srcStack.push(destStack.pop());
+			}
+				
+		    while(!ascending && destStack.size()>0 && destStack.peek()<next)
+			{
+				srcStack.push(destStack.pop());	
+			}
+		    	
+		    destStack.push(next);
+				
+		}
+			
+		System.out.print("Sorter: ");
+			
+		for (int number : destStack)
+			System.out.print(number + " ");
+			
+		System.out.println();
+		System.out.println(numbers);
 	}
 
 }
